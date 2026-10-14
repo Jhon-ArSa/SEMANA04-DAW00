@@ -1,0 +1,66 @@
+.theme-control {
+  margin: 2rem 0;
+}
+
+.theme-control h3 {
+  color: #555;
+  margin-bottom: 1rem;
+}
+
+.btn-active {
+  background: #4caf50 !important;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.3);
+}
+
+.themed-content {
+  border-radius: 8px;
+  padding: 2rem;
+  margin: 2rem 0;
+  transition: all 0.3s ease;
+}
+
+.themed-content.theme-dark {
+  background: #2c3e50;
+  color: white;
+}
+
+.themed-content.theme-light {
+  background: #ecf0f1;
+  color: #2c3e50;
+}
+
+.themed-content h3 {
+  margin-top: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.themed-content p {
+  line-height: 1.6;
+}
+
+.component-info {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 1.5rem;
+  border-radius: 6px;
+  margin: 1.5rem 0;
+}
+
+.component-info h4 {
+  margin-top: 0;
+  color: #61dafb;
+}
+
+.provider-info {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 1rem;
+  border-radius: 6px;
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.provider-info p {
+  margin: 0;
+  font-size: 0.95rem;
+}

@@ -1,0 +1,839 @@
+{% comment %}  {% endcomment %}<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agregados Salazar | Con Actividades React</title>
+    
+    <!-- Estilos originales -->
+    <link rel="stylesheet" href="style.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@4.5.0/fonts/remixicon.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+    
+    <!-- React CDN -->
+    <script crossorigin src="https://unpkg.com/react@18/umd/react.production.min.js"></script>
+    <script crossorigin src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+    
+    <style>
+        /* Estilos para las actividades React */
+        .react-activity {
+            padding: 80px 20px;
+            background: #f5f7fa;
+        }
+        
+        .react-activity:nth-child(even) {
+            background: #fff;
+        }
+        
+        .activity-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+        }
+        
+        .react-activity:nth-child(even) .activity-container {
+            background: #f5f7fa;
+        }
+        
+        .activity-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+        
+        .activity-header h2 {
+            color: #ff6b35;
+            font-size: 2rem;
+            margin: 0;
+        }
+        
+        .badge-narrative {
+            background: #61dafb;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 25px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        
+        .step-badge {
+            background: #4fc3f7;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 0.95rem;
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+        
+        .activity-content h3 {
+            color: #333;
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+        }
+        
+        .description {
+            color: #666;
+            line-height: 1.7;
+            margin-bottom: 30px;
+        }
+        
+        /* Contador */
+        .counter-display {
+            background: #f5f5f5;
+            border-radius: 12px;
+            padding: 40px;
+            text-align: center;
+            margin: 30px 0;
+        }
+        
+        .counter-value {
+            font-size: 5rem;
+            color: #333;
+            font-weight: bold;
+            margin: 0;
+        }
+        
+        .button-group {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 25px 0;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: white;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+        
+        .btn-primary { background: #5c6bc0; }
+        .btn-success { background: #4caf50; }
+        .btn-warning { background: #ff9800; }
+        .btn-error { background: #f44336; }
+        
+        .info-box {
+            background: #fff9c4;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 20px 0;
+        }
+        
+        /* Status Display */
+        .status-display {
+            background: #f5f5f5;
+            border-radius: 12px;
+            padding: 60px 30px;
+            margin: 30px 0;
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .status-message {
+            text-align: center;
+            padding: 20px;
+            border-radius: 10px;
+            width: 100%;
+        }
+        
+        .status-message.idle { background: #e3f2fd; color: #1976d2; }
+        .status-message.loading { background: #fff9c4; color: #f57c00; }
+        .status-message.success { background: #e8f5e9; color: #2e7d32; }
+        .status-message.error { background: #ffebee; color: #c62828; }
+        
+        .spinner {
+            font-size: 3rem;
+            animation: spin 2s linear infinite;
+        }
+        
+        @keyframes spin {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Theme Context */
+        .theme-control {
+            margin: 30px 0;
+        }
+        
+        .themed-content {
+            border-radius: 12px;
+            padding: 30px;
+            margin: 30px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .themed-content.theme-dark {
+            background: #2c3e50;
+            color: white;
+        }
+        
+        .themed-content.theme-light {
+            background: #ecf0f1;
+            color: #2c3e50;
+        }
+        
+        /* Optimization */
+        .filter-input {
+            width: 100%;
+            padding: 15px;
+            border: 2px solid #ddd;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+            transition: border-color 0.3s ease;
+        }
+        
+        .filter-input:focus {
+            outline: none;
+            border-color: #61dafb;
+            box-shadow: 0 0 0 3px rgba(97, 218, 251, 0.1);
+        }
+        
+        .products-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+            gap: 15px;
+            margin: 25px 0;
+        }
+        
+        .product-item {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+        
+        .product-item:hover {
+            background: #e0e0e0;
+            transform: translateY(-3px);
+        }
+        
+        /* Custom Hook - Store */
+        .store-layout {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        
+        .product-card {
+            background: #f5f5f5;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.1);
+        }
+        
+        .price {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #4caf50;
+            margin: 10px 0;
+        }
+        
+        .cart-section {
+            background: #f9f9f9;
+            padding: 25px;
+            border-radius: 12px;
+            height: fit-content;
+            position: sticky;
+            top: 100px;
+        }
+        
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 10px;
+        }
+        
+        .btn-remove {
+            background: #f44336;
+            color: white;
+            border: none;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+        
+        .cart-total {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin: 15px 0;
+            font-size: 1.3rem;
+            color: #2e7d32;
+        }
+        
+        @media (max-width: 900px) {
+            .store-layout {
+                grid-template-columns: 1fr;
+            }
+            
+            .cart-section {
+                position: static;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header original -->
+    <header>
+        <a href="#" class="logo">  
+            <i class="ri-home-5-fill"></i> <span> Agregados</span> 
+        </a>
+
+        <ul class="navbar" role="navigation" aria-label="Menú principal">
+            <li><a href="#inicio">Inicio</a></li>
+            <li><a href="#agregados">Agregados</a></li>
+            <li><a href="#react1">React 1</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#react3">React 3</a></li>
+            <li><a href="#react5">React 5</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+        </ul>
+
+        <div class="main">
+            <a href="#contacto" class="user"> 
+                <i class="ri-arrow-right-down-box-fill"></i> Cotizar 
+            </a>
+            <div class="bx bx-menu" id="menu-icon"></div>
+        </div>
+    </header>
+
+    <!-- Sección Home original -->
+    <main id="main-content">
+    <section id="inicio" class="home" aria-label="Sección de inicio">
+        <video autoplay muted loop id="video-bg">
+            <source src="agregados1.mp4" type="video/mp4">
+            Tu navegador no soporta videos HTML5.
+        </video>
+
+        <div class="home-content">
+            <img src="img/logo02.png" alt="Logo de Agregados" class="home-logo">
+            <h1>Bienvenido a Agregados</h1>
+            <p>Ofrecemos los mejores materiales para tus proyectos de construcción.</p>
+            <a href="#contacto" class="btn-cotizar">Cotizar ahora</a>
+        </div>
+
+        <a href="#agregados" class="scroll-abajo" aria-label="Ir a la siguiente sección">
+            <i class="ri-arrow-down-line"></i>
+        </a>
+    </section>
+    </main>
+
+    <!-- Sección Agregados original (resumida) -->
+    <section id="agregados" class="agregados">
+        <h2 class="agregados-titulo">Nuestros Agregados</h2>
+        <p class="agregados-descripcion">Ofrecemos una amplia variedad de agregados para tus proyectos de construcción.</p>
+
+        <div class="agregados-contenedor">
+            <div class="agregado-card">
+                <img src="img/arenafina.png" alt="Arena fina" class="agregado-imagen">
+                <div class="agregado-info">
+                    <h3>Arena Fina</h3>
+                    <p>La arena fina se utiliza para acabados en construcción.</p>
+                    <a href="#contacto" class="agregado-boton">Pedir</a>
+                </div>
+            </div>
+
+            <div class="agregado-card">
+                <img src="img/arena-gruesa.jpg" alt="Arena gruesa" class="agregado-imagen">
+                <div class="agregado-info">
+                    <h3>Arena Gruesa</h3>
+                    <p>Se usa para concreto y cimientos.</p>
+                    <a href="#contacto" class="agregado-boton">Pedir</a>
+                </div>
+            </div>
+
+            <div class="agregado-card">
+                <img src="img/piedra.jpg" alt="Piedra" class="agregado-imagen">
+                <div class="agregado-info">
+                    <h3>Piedra</h3>
+                    <p>Empleada en cimientos y obras estructurales.</p>
+                    <a href="#contacto" class="agregado-boton">Pedir</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ACTIVIDAD 1: CONTADOR ========== -->
+    <section id="react1" class="react-activity">
+        <div id="react-app-1"></div>
+    </section>
+
+    <!-- Sección Cobertura original (resumida) -->
+    <section id="cobertura" class="cobertura">
+        <div class="cobertura-header">
+            <h2>Áreas de Cobertura</h2>
+            <p>Llevamos nuestros materiales a Huancayo, Jauja, Concepción, Chupaca y Huancavelica.</p>
+        </div>
+    </section>
+
+    <!-- ========== ACTIVIDAD 2: useEffect ========== -->
+    <section id="react2" class="react-activity">
+        <div id="react-app-2"></div>
+    </section>
+
+    <!-- Sección Servicios original (resumida) -->
+    <section id="servicios" class="servicios">
+        <div class="servicios-header">
+            <h2>Nuestros Servicios</h2>
+            <p>Brindamos soluciones integrales en agregados, transporte y logística.</p>
+        </div>
+
+        <div class="servicios-contenedor">
+            <div class="servicio-card">
+                <div class="servicio-img">
+                    <img src="img/agregados.jpg" alt="Venta de agregados">
+                </div>
+                <i class="ri-truck-fill"></i>
+                <h3>Venta de Agregados</h3>
+                <p>Venta de arena, piedra y material chancado de alta calidad.</p>
+            </div>
+
+            <div class="servicio-card">
+                <div class="servicio-img">
+                    <img src="img/volquete.jpg" alt="Transporte">
+                </div>
+                <i class="ri-road-map-fill"></i>
+                <h3>Transporte de Materiales</h3>
+                <p>Traslado seguro y puntual de materiales.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========== ACTIVIDAD 3: useContext ========== -->
+    <section id="react3" class="react-activity">
+        <div id="react-app-3"></div>
+    </section>
+
+    <!-- Sección Nosotros (resumida) -->
+    <section class="nosotros" id="nosotros">
+        <div class="nosotros-header">
+            <h2>Sobre Nosotros</h2>
+            <p>Más de 15 años de experiencia en el rubro de la construcción.</p>
+        </div>
+    </section>
+
+    <!-- ========== ACTIVIDAD 4: Optimización ========== -->
+    <section id="react4" class="react-activity">
+        <div id="react-app-4"></div>
+    </section>
+
+    <!-- Sección Testimonios (resumida) -->
+    <section class="testimonios" id="testimonios">
+        <div class="testimonios-header">
+            <h2>Lo que dicen nuestros clientes</h2>
+            <p>La confianza de quienes construyen es nuestra mayor recompensa.</p>
+        </div>
+    </section>
+
+    <!-- ========== ACTIVIDAD 5: Custom Hook - TechStore ========== -->
+    <section id="react5" class="react-activity">
+        <div id="react-app-5"></div>
+    </section>
+
+    <!-- Sección Contacto -->
+    <section class="contacto" id="contacto">
+        <h2 class="contacto-titulo">Contáctanos</h2>
+        <p class="contacto-descripcion">
+            Estamos listos para ayudarte. Comunícate con nosotros.
+        </p>
+
+        <div class="contacto-contenedor">
+            <div class="contacto-card">
+                <div class="info-item">
+                    <i class="ri-map-pin-fill"></i>
+                    <div>
+                        <h3>Dirección</h3>
+                        <p>Av. Arica #216, Huancayo – Pilcomayo, Perú</p>
+                    </div>
+                </div>
+
+                <div class="info-item">
+                    <i class="ri-phone-fill"></i>
+                    <div>
+                        <h3>Teléfono</h3>
+                        <p><a href="tel:+51964636092">+51 964 636 092</a></p>
+                    </div>
+                </div>
+
+                <a href="https://wa.me/51964636092" target="_blank" class="btn-whatsapp">
+                    <i class="ri-whatsapp-fill"></i>
+                    Escríbenos por WhatsApp
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-derechos">
+            <p>&copy; 2025 Agregados Salazar. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <!-- Scripts React -->
+    <script type="text/babel">
+        const { useState, useEffect, useContext, createContext, useMemo, useCallback, useRef } = React;
+
+        // ============ ACTIVIDAD 1: CONTADOR ============
+        function Activity1Counter() {
+            const [counter, setCounter] = useState(0);
+
+            return (
+                <div className="activity-container">
+                    <div className="activity-header">
+                        <h2>1️⃣ Ciclo de Render y Re-renders</h2>
+                        <span className="badge-narrative">Narrativa</span>
+                    </div>
+                    <div className="step-badge">✓ Paso 1 Activo</div>
+                    
+                    <div className="activity-content">
+                        <h3>📊 Contador con useState</h3>
+                        <p className="description">
+                            Demostrar qué dispara un render en páginas. Configurar StrictMode y render props.
+                        </p>
+                        
+                        <div className="counter-display">
+                            <h1 className="counter-value">{counter}</h1>
+                        </div>
+                        
+                        <div className="button-group">
+                            <button className="btn btn-primary" onClick={() => setCounter(counter + 1)}>
+                                Suma
+                            </button>
+                            <button className="btn btn-success" onClick={() => setCounter(counter - 1)}>
+                                Resta
+                            </button>
+                            <button className="btn btn-warning" onClick={() => setCounter(0)}>
+                                Reset
+                            </button>
+                        </div>
+
+                        <div className="info-box">
+                            <p>⚠️ Última acción: {counter === 0 ? 'reset' : counter > 0 ? 'suma' : 'resta'}</p>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // ============ ACTIVIDAD 2: useEffect ============
+        function Activity2UseEffect() {
+            const [status, setStatus] = useState({ idle: true, loading: false, success: false, error: false });
+
+            const handleCargar = () => {
+                setStatus({ idle: false, loading: true, success: false, error: false });
+                setTimeout(() => {
+                    setStatus({ idle: false, loading: false, success: true, error: false });
+                }, 2000);
+            };
+
+            useEffect(() => {
+                return () => console.log('Cleanup ejecutado');
+            }, [status]);
+
+            return (
+                <div className="activity-container">
+                    <div className="activity-header">
+                        <h2>2️⃣ useEffect con async/await y Cleanup</h2>
+                        <span className="badge-narrative">Narrativa</span>
+                    </div>
+                    <div className="step-badge">✓ Paso 2 Activo</div>
+                    
+                    <div className="activity-content">
+                        <h3>📡 Carga de datos con useEffect</h3>
+                        <p className="description">
+                            Refactorizar fetch de API: migrar then() a async/await dentro de useEffect.
+                        </p>
+
+                        <div className="button-group">
+                            <button className="btn btn-primary" onClick={handleCargar}>🔄 Cargar</button>
+                            <button className="btn btn-success" onClick={() => setStatus({ idle: false, loading: false, success: true, error: false })}>✅ Éxito</button>
+                            <button className="btn btn-error" onClick={() => setStatus({ idle: false, loading: false, success: false, error: true })}>❌ Error</button>
+                            <button className="btn btn-warning" onClick={() => setStatus({ idle: true, loading: false, success: false, error: false })}>🧹 Cleanup</button>
+                        </div>
+
+                        <div className="status-display">
+                            {status.idle && <div className="status-message idle"><p>⏸️ Estado inicial - Listo para cargar datos</p></div>}
+                            {status.loading && <div className="status-message loading"><div className="spinner">⏳</div><p>Esperando petición...</p></div>}
+                            {status.success && <div className="status-message success"><p>✅ Datos cargados exitosamente</p></div>}
+                            {status.error && <div className="status-message error"><p>❌ Error al cargar los datos</p></div>}
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // ============ ACTIVIDAD 3: useContext ============
+        const ThemeContext = createContext();
+
+        function ThemeProvider({ children }) {
+            const [theme, setTheme] = useState('dark');
+            const toggleTheme = () => setTheme(prev => prev === 'light' ? 'dark' : 'light');
+
+            return (
+                <ThemeContext.Provider value={{ theme, toggleTheme }}>
+                    {children}
+                </ThemeContext.Provider>
+            );
+        }
+
+        function Activity3Context() {
+            const { theme, toggleTheme } = useContext(ThemeContext);
+
+            return (
+                <div className="activity-container">
+                    <div className="activity-header">
+                        <h2>3️⃣ useContext: Estado Global</h2>
+                        <span className="badge-narrative">Narrativa</span>
+                    </div>
+                    <div className="step-badge">✓ Paso 3 Activo</div>
+                    
+                    <div className="activity-content">
+                        <h3>🌐 useContext para tema global</h3>
+                        <p className="description">
+                            Implementar useContext para tema global. Crear Provider y consumirlo sin prop drilling.
+                        </p>
+
+                        <div className="theme-control">
+                            <h3>🎨 ThemeControl en acción</h3>
+                            <div className="button-group">
+                                <button className="btn btn-primary" onClick={() => theme !== 'light' && toggleTheme()}>
+                                    ☀️ Claro
+                                </button>
+                                <button className="btn btn-success" onClick={() => theme !== 'dark' && toggleTheme()}>
+                                    🌙 Oscuro
+                                </button>
+                            </div>
+                        </div>
+
+                        <div className={`themed-content theme-${theme}`}>
+                            <h3>Tema Actual: {theme === 'dark' ? 'Oscuro 🌙' : 'Claro ☀️'}</h3>
+                            <p>Este componente consume el contexto directamente sin render props.</p>
+                            <p><strong>Provider:</strong> ThemeProvider | <strong>Valor actual:</strong> {theme}</p>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // ============ ACTIVIDAD 4: Optimización ============
+        function Activity4Optimization() {
+            const [filter, setFilter] = useState('');
+            const [products] = useState(['Laptop', 'Mouse', 'Teclado', 'Monitor', 'Webcam', 'Auriculares']);
+            const renderCount = useRef(0);
+            const inputRef = useRef(null);
+
+            renderCount.current += 1;
+
+            const filteredProducts = useMemo(() => {
+                console.log('Filtrando productos...');
+                return products.filter(product => product.toLowerCase().includes(filter.toLowerCase()));
+            }, [filter, products]);
+
+            const handleClear = useCallback(() => {
+                setFilter('');
+                inputRef.current?.focus();
+            }, []);
+
+            return (
+                <div className="activity-container">
+                    <div className="activity-header">
+                        <h2>4️⃣ Optimización en vivo</h2>
+                        <span className="badge-narrative">Narrativa</span>
+                    </div>
+                    <div className="step-badge">✓ Paso 4 Activo</div>
+                    
+                    <div className="activity-content">
+                        <h3>⚡ useMemo, useCallback, useRef</h3>
+                        <p className="description">
+                            Optimizar componente con useMemo, useCallback y useRef.
+                        </p>
+
+                        <div>
+                            <label htmlFor="filter"><strong>🔍 Filtrado de productos:</strong></label>
+                            <input
+                                id="filter"
+                                ref={inputRef}
+                                type="text"
+                                value={filter}
+                                onChange={(e) => setFilter(e.target.value)}
+                                placeholder="Buscar productos..."
+                                className="filter-input"
+                            />
+                            <div className="info-box">
+                                📊 Mostrando {filteredProducts.length} productos
+                            </div>
+                        </div>
+
+                        <div className="products-list">
+                            {filteredProducts.map((product, index) => (
+                                <div key={index} className="product-item">{product}</div>
+                            ))}
+                        </div>
+
+                        <div className="button-group">
+                            <button className="btn btn-primary" onClick={handleClear}>
+                                Limpiar (useCallback)
+                            </button>
+                            <button className="btn btn-success" onClick={() => inputRef.current?.focus()}>
+                                Focus (useRef)
+                            </button>
+                        </div>
+
+                        <div className="info-box">
+                            <p>🔄 Re-renders: <strong>{renderCount.current}</strong></p>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // ============ ACTIVIDAD 5: Custom Hook ============
+        function useShoppingCart() {
+            const [cart, setCart] = useState([]);
+
+            const addToCart = (item) => setCart(prev => [...prev, item]);
+            const removeFromCart = (id) => setCart(prev => prev.filter((item, index) => index !== id));
+            const clearCart = () => setCart([]);
+            const total = cart.reduce((sum, item) => sum + item.price, 0);
+
+            return { cart, addToCart, removeFromCart, clearCart, total };
+        }
+
+        function Activity5CustomHook() {
+            const { cart, addToCart, removeFromCart, clearCart, total } = useShoppingCart();
+
+            const products = [
+                { id: 1, name: 'Laptop Gaming', price: 1200 },
+                { id: 2, name: 'Mouse RGB', price: 50 },
+                { id: 3, name: 'Teclado Mecánico', price: 150 },
+                { id: 4, name: 'Monitor 4K', price: 400 }
+            ];
+
+            return (
+                <div className="activity-container">
+                    <div className="activity-header">
+                        <h2>5️⃣ Hook Personalizado</h2>
+                        <span className="badge-narrative">Narrativa</span>
+                    </div>
+                    <div className="step-badge">✓ Paso 5 Activo</div>
+                    
+                    <div className="activity-content">
+                        <h3>🛒 TechStore - Tienda de Equipos</h3>
+                        <p className="description">
+                            Hook personalizado useShoppingCart para carrito de compras.
+                        </p>
+
+                        <div className="store-layout">
+                            <div className="catalog-section">
+                                <h4>📦 Catálogo</h4>
+                                <div className="products-grid">
+                                    {products.map(product => (
+                                        <div key={product.id} className="product-card">
+                                            <h5>{product.name}</h5>
+                                            <p className="price">${product.price}</p>
+                                            <button className="btn btn-primary" onClick={() => addToCart(product)}>
+                                                Agregar
+                                            </button>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
+
+                            <div className="cart-section">
+                                <h4>🛒 Carrito ({cart.length})</h4>
+                                {cart.length === 0 ? (
+                                    <p>El carrito está vacío</p>
+                                ) : (
+                                    <>
+                                        {cart.map((item, index) => (
+                                            <div key={index} className="cart-item">
+                                                <span>{item.name}</span>
+                                                <span>${item.price}</span>
+                                                <button className="btn-remove" onClick={() => removeFromCart(index)}>✕</button>
+                                            </div>
+                                        ))}
+                                        <div className="cart-total">
+                                            <strong>Total: ${total}</strong>
+                                        </div>
+                                        <button className="btn btn-error" onClick={clearCart} style={{width: '100%'}}>
+                                            🗑️ Vaciar
+                                        </button>
+                                    </>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            );
+        }
+
+        // Renderizar todas las actividades
+        const root1 = ReactDOM.createRoot(document.getElementById('react-app-1'));
+        root1.render(<Activity1Counter />);
+
+        const root2 = ReactDOM.createRoot(document.getElementById('react-app-2'));
+        root2.render(<Activity2UseEffect />);
+
+        const root3 = ReactDOM.createRoot(document.getElementById('react-app-3'));
+        root3.render(
+            <ThemeProvider>
+                <Activity3Context />
+            </ThemeProvider>
+        );
+
+        const root4 = ReactDOM.createRoot(document.getElementById('react-app-4'));
+        root4.render(<Activity4Optimization />);
+
+        const root5 = ReactDOM.createRoot(document.getElementById('react-app-5'));
+        root5.render(<Activity5CustomHook />);
+    </script>
+
+    <script src="script.js"></script>
+</body>
+</html>

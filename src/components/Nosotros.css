@@ -1,0 +1,112 @@
+.nosotros {
+  padding: 100px 20px;
+  background: var(--section-bg, white);
+}
+
+.nosotros-header {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.nosotros-header h2 {
+  font-size: 2.5rem;
+  color: #ff6b35;
+}
+
+.nosotros-header p {
+  color: #666;
+  max-width: 650px;
+  margin: 10px auto 0;
+}
+
+.nosotros-contenedor {
+  max-width: 1200px;
+  margin: auto;
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 50px;
+  align-items: center;
+}
+
+.nosotros-info h3 {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.nosotros-info p {
+  color: #666;
+  line-height: 1.7;
+}
+
+.mision-vision {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 25px;
+  margin: 30px 0;
+}
+
+.mision-vision h4 {
+  color: #ff6b35;
+  margin-bottom: 8px;
+}
+
+.btn-saber-mas {
+  display: inline-block;
+  padding: 14px 30px;
+  background: #ff6b35;
+  color: #fff;
+  text-decoration: none;
+  border-radius: 30px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.btn-saber-mas:hover {
+  transform: translateY(-3px);
+}
+
+.estadisticas {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+.estadistica {
+  background: #fff;
+  padding: 30px;
+  border-radius: 16px;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.estadistica:hover {
+  transform: translateY(-8px);
+}
+
+.estadistica i {
+  font-size: 36px;
+  color: #ff6b35;
+  margin-bottom: 10px;
+}
+
+.estadistica-numero {
+  font-size: 2.2rem;
+  color: #333;
+}
+
+.estadistica p {
+  color: #666;
+}
+
+@media (max-width: 900px) {
+  .nosotros-contenedor {
+    grid-template-columns: 1fr;
+  }
+
+  .mision-vision {
+    grid-template-columns: 1fr;
+  }
+}

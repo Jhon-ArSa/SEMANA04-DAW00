@@ -1,0 +1,138 @@
+.footer {
+  background: var(--footer-bg, #333);
+  color: #fff;
+  padding: 60px 20px 20px;
+}
+
+.footer-contenedor {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-columna {
+  flex: 1;
+  min-width: 200px;
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  color: #fff;
+  margin-bottom: 15px;
+  text-decoration: none;
+}
+
+.footer-logo i {
+  color: #ff6b35;
+  font-size: 1.8rem;
+  margin-right: 8px;
+}
+
+.footer-descripcion {
+  color: #ccc;
+  line-height: 1.6;
+}
+
+.footer-titulo {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  color: #ff6b35;
+}
+
+.footer-enlaces {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-enlaces li {
+  margin-bottom: 10px;
+}
+
+.footer-enlaces a {
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-enlaces a:hover {
+  color: #ff6b35;
+}
+
+.footer-contacto {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-contacto li {
+  color: #ccc;
+  margin-bottom: 12px;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.footer-contacto i {
+  color: #ff6b35;
+  font-size: 1.2rem;
+  margin-top: 2px;
+}
+
+.footer-contacto a {
+  color: #ccc;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.footer-contacto a:hover {
+  color: #ff6b35;
+}
+
+.footer-redes {
+  display: flex;
+  gap: 15px;
+}
+
+.red-social {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 1.3rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+}
+
+.red-social:hover {
+  background: #ff6b35;
+  transform: translateY(-3px);
+}
+
+.footer-derechos {
+  margin-top: 40px;
+  border-top: 1px solid #444;
+  padding-top: 20px;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #ccc;
+}
+
+@media (max-width: 768px) {
+  .footer-contenedor {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-redes {
+    justify-content: center;
+  }
+}

@@ -1,0 +1,123 @@
+.stats-counter {
+  padding: 80px 20px;
+  background: var(--stats-bg, linear-gradient(135deg, #667eea 0%, #764ba2 100%));
+  color: white;
+  text-align: center;
+}
+
+.stats-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.stats-title {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: white;
+}
+
+.stats-subtitle {
+  font-size: 1.2rem;
+  margin-bottom: 50px;
+  opacity: 0.9;
+}
+
+.stats-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 30px;
+  margin-bottom: 40px;
+}
+
+.stat-card {
+  background: var(--stat-card-bg, rgba(255, 255, 255, 0.95));
+  padding: 40px 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transition: transform 0.3s ease;
+  color: var(--text-color, #333);
+}
+
+.stat-card:hover {
+  transform: translateY(-10px);
+}
+
+.stat-icon {
+  font-size: 3rem;
+  color: #667eea;
+  margin-bottom: 15px;
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--text-color, #333);
+  margin-bottom: 10px;
+}
+
+.stat-label {
+  font-size: 1.1rem;
+  color: var(--text-muted, #666);
+  margin-bottom: 20px;
+}
+
+.stat-btn {
+  padding: 12px 30px;
+  border: none;
+  border-radius: 25px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.stat-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+}
+
+.stat-btn.liked {
+  background: #f44336;
+}
+
+.stat-stars {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  font-size: 1.5rem;
+  color: #ffd700;
+  margin-top: 10px;
+}
+
+.stats-info {
+  background: rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.stats-info p {
+  margin: 0;
+  line-height: 1.8;
+}
+
+.stats-info code {
+  background: rgba(0, 0, 0, 0.2);
+  padding: 3px 8px;
+  border-radius: 4px;
+  color: #ffd700;
+}
+
+@media (max-width: 768px) {
+  .stats-title {
+    font-size: 2rem;
+  }
+
+  .stat-number {
+    font-size: 2.5rem;
+  }
+}

@@ -1,0 +1,74 @@
+.optimization-demo {
+  margin: 2rem 0;
+}
+
+.filter-section,
+.callback-section,
+.ref-section {
+  margin: 2rem 0;
+}
+
+.filter-section label,
+.callback-section h4,
+.ref-section h4 {
+  display: block;
+  color: #555;
+  margin-bottom: 1rem;
+  font-size: 1.1rem;
+}
+
+.filter-input {
+  width: 100%;
+  padding: 1rem;
+  border: 2px solid #ddd;
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease;
+}
+
+.filter-input:focus {
+  outline: none;
+  border-color: #61dafb;
+  box-shadow: 0 0 0 3px rgba(97, 218, 251, 0.1);
+}
+
+.products-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 1rem;
+  margin: 1.5rem 0;
+}
+
+.product-item {
+  background: #f5f5f5;
+  padding: 1rem;
+  border-radius: 6px;
+  text-align: center;
+  font-weight: 500;
+  color: #555;
+  transition: all 0.3s ease;
+}
+
+.product-item:hover {
+  background: #e0e0e0;
+  transform: translateY(-2px);
+}
+
+.render-info {
+  background: #e3f2fd;
+  padding: 1rem;
+  border-radius: 6px;
+  margin-top: 2rem;
+  text-align: center;
+}
+
+.render-info p {
+  margin: 0;
+  color: #1976d2;
+  font-size: 1rem;
+}
+
+.render-info strong {
+  color: #d32f2f;
+  font-size: 1.2rem;
+}
