@@ -590,7 +590,7 @@ npm run dev
 
 ## 👨‍💻 Autor
 
-**Alumno**: [Tu Nombre]  
+**Alumno**: Aroni salazar Jhon Edison   
 **Curso**: Desarrollo de Aplicaciones Web (IS093A)  
 **Universidad**: Universidad Nacional del Centro del Perú  
 **Fecha**: 2025
