@@ -32,7 +32,7 @@ export default function Header() {
       <ul className={`navbar ${menuOpen ? 'open' : ''}`} role="navigation" aria-label="Menú principal">
         <li><a href="#inicio" onClick={(e) => handleNavClick(e, 'inicio')}>Inicio</a></li>
         <li><a href="#agregados" onClick={(e) => handleNavClick(e, 'agregados')}>Agregados</a></li>
-        <li><a href="#react1" onClick={(e) => handleNavClick(e, 'react1')}>React Hooks</a></li>
+        <li><a href="#dashboard-section" onClick={(e) => handleNavClick(e, 'dashboard-section')}>Dashboard</a></li>
         <li><a href="#servicios" onClick={(e) => handleNavClick(e, 'servicios')}>Servicios</a></li>
         <li><a href="#nosotros" onClick={(e) => handleNavClick(e, 'nosotros')}>Nosotros</a></li>
         <li><a href="#testimonios" onClick={(e) => handleNavClick(e, 'testimonios')}>Testimonios</a></li>

@@ -6,6 +6,7 @@ import Header from './components/Header'
 import Hero from './components/Hero'
 import StatsCounter from './components/StatsCounter'
 import Agregados from './components/Agregados'
+import Dashboard from './components/Dashboard'
 import Cobertura from './components/Cobertura'
 import Servicios from './components/Servicios'
 import Nosotros from './components/Nosotros'
@@ -84,6 +85,11 @@ function AppContent() {
         
         {/* Paso 4: Buscador de agregados + Paso 5: Agregar al carrito */}
         <Agregados />
+        
+        {/* GUÍA PRÁCTICA SEMANA 7 - PARTE 2: Dashboard con Estado Complejo */}
+        <section id="dashboard-section" style={{ background: 'var(--section-bg)', padding: '80px 0' }}>
+          <Dashboard />
+        </section>
         
         <Cobertura />
         <Servicios />

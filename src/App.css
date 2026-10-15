@@ -123,6 +123,39 @@
   100% { transform: scale(1.9); opacity: 0; }
 }
 
+/* Dashboard Section */
+.dashboard-section {
+  padding: 80px 20px;
+  background: var(--section-bg);
+  position: relative;
+}
+
+.practice-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 12px 30px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 1.1rem;
+  margin: 0 auto 40px;
+  display: flex;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(102, 126, 234, 0.4);
+  animation: float 3s ease-in-out infinite;
+}
+
+.practice-badge i {
+  font-size: 1.5rem;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+}
+
 /* Scroll Reveal Animation */
 [data-reveal] {
   opacity: 0;
